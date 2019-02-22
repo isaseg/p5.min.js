@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script src="p5.min.js"></script>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+    //make variables for the window width and height
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    //make variables for the center position (w/2-half the shape's width) same for h
+    var posX = w/2-50;
+    var posY = h/2-50;
+    
+    //make the canvas
+      function setup() {
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        //make the background white
+        background(255);
+        //fill the rectangle with color
+        fill(color('#a7d694'));
+        //no border around the shape
+        strokeWeight(0);
+        //make a rectangle (square) with posX and posY
+        rect(posX,posY,100,100);
+        //if w is pressed and its y is greater than 0 (the top)
+        if ((keyIsDown(87)) && (posY > 0)) {
+          posY -= 10;
+        }
+        //if a is pressed and its x is greater than 0 (the left wall)
+        if ((keyIsDown(65)) && (posX > 0)) {
+          posX -= 10;
+        }
+        //if s is pressed and its y is less than the height of the window minus the height of your shape
+        if ((keyIsDown(83)) && (posY < h-100)) {
+          posY += 10;
+        }
+        //if d is pressed and its x is less than the width of the window minus the width of your shape
+        if ((keyIsDown(68)) && (posX < w-100)) {
+          posX += 10;
+        }
+      }
+    </script>
+  </body>
+</html>
