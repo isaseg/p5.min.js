@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <script src="p5.min.js"></script>
+    <style>
+      body {
+        overflow:hidden;
+        margin:0;
+        padding:0;
+      }
+      #posx {
+        position: fixed;
+      }
+      #posy {
+        position: fixed;
+        margin-top: 0vh;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="posx"></p>
+    <p id="posy"></p>
+    <script>
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var ball = new ball(); //creating new object globally
+      
+      function setup() {
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        background(255);
+        ball.show();
+        ball.move();
+      }
+      
+      function ball() {
+        this.x = 100; //"this" refers to the ball
+        this.y = 100;
+        this.show = function() {
+          fill(color('red'));
+          ellipse(this.x,this.y,100,100);
+        };
+        this.move = function() {
+          if (keyIsDown(39) && (this.x < w-57)) { //right arrow
+            this.x += 10;
+            document.getElementById('posx').innerHTML = "X value: " + this.x;
+            document.getElementById('posy').innerHTML = "Y value: " + this.y;
+          }
+          if (keyIsDown(37) && (this.x > 50)) { //left arrow
+            this.x -= 10;
+            document.getElementById('posx').innerHTML = "X value: " + this.x;
+            document.getElementById('posy').innerHTML = "Y value: " + this.y;
+          }
+          if (keyIsDown(38) && (this.y > 50)) { //up arrow
+            this.y -= 10;
+            document.getElementById('posx').innerHTML = "X value: " + this.x;
+            document.getElementById('posy').innerHTML = "Y value: " + this.y;
+          }
+          if(keyIsDown(40) && (this.y < h-50)){ //down arrow
+            this.y += 10;
+            document.getElementById('posx').innerHTML = "X value: " + this.x;
+            document.getElementById('posy').innerHTML = "Y value: " + this.y;
+          }
+        };
+      }
+      
+      
+    </script>
+  </body>
+</html>
