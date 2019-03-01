@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <script src="p5.min.js"></script>
+    <style>
+      body {
+        overflow:hidden;
+        margin:0;
+        padding:0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var ball = new ball();
+      var balltwo = new balltwo();
+      var d; //var for distance
+      var speed = 15;
+      var speed1 = 15;
+      var x = 255;
+      var y = 255;
+      var z = 255;
+      
+      function setup() {
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        background(255);
+        ball.show();
+        balltwo.show();
+        ball.move();
+        balltwo.move();
+        balltwo.kill();
+      }
+      
+      function ball() { //randomizing x and y
+        this.x = Math.floor(Math.random()*w);
+        this.y = Math.floor(Math.random()*h);
+        this.show = function() {
+          fill(62,89,254);
+          ellipse(this.x,this.y,100,100);
+        };
+        this.move = function() {
+          if (keyIsDown(68) && (this.x < w-60)) { //right
+            this.x += speed;
+          }
+          if (keyIsDown(65) && (this.x > 60)) { //left
+            this.x -= speed;
+          }
+          if (keyIsDown(87) && (this.y > 60)) { //up
+            this.y -= speed;
+          }
+          if(keyIsDown(83) && (this.y < h-60)){ //down
+            this.y += speed;
+          }
+        };
+      }
+      
+      function balltwo() { //randomizing the x and y
+        this.x = Math.floor(Math.random()*w);
+        this.y = Math.floor(Math.random()*h);
+        this.show = function() {
+          fill(x,y,z);
+          ellipse(this.x,this.y,100,100);
+          text('P2');
+        };
+        this.move = function() {
+          if (keyIsDown(76) && (this.x < w-60)) { //right
+            this.x += speed1;
+          }
+          if (keyIsDown(74) && (this.x > 60)) { //left
+            this.x -= speed1;
+          }
+          if (keyIsDown(73) && (this.y > 60)) { //up
+            this.y -= speed1;
+          }
+          if(keyIsDown(75) && (this.y < h-60)){ //down
+            this.y += speed1;
+          }
+        };
+        this.kill = function() { //dist() is its own function. how many pixels between x1 y1 and x2 y2
+          d = dist(this.x,this.y,ball.x,ball.y);
+          if ((d < 85) && (x > 0)) {
+            speed1 += 0.1;
+            x -= 5;
+          }
+          else if ((d < 85) && (z > 0)) {
+            speed1 += 0.1;
+            z -= 5;
+          }
+          else if ((d < 85) && (y)) {
+            speed1 += 0.1;
+            y -= 5;
+          }
+        }
+      }
+      
+      
+    </script>
+  </body>
+</html>
