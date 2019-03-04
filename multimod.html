@@ -7,6 +7,9 @@
         margin:0;
         padding:0;
       }
+      p {
+        position: fixed;
+      }
     </style>
   </head>
   <body>
@@ -21,6 +24,7 @@
       var x = 255;
       var y = 255;
       var z = 255;
+      var s = 0;
       
       function setup() {
         createCanvas(w,h);
@@ -33,6 +37,9 @@
         ball.move();
         balltwo.move();
         balltwo.kill();
+        textSize(20);
+        fill(0);
+        text('Score: ' + s, 10,20);
       }
       
       function ball() { //randomizing x and y
@@ -64,7 +71,7 @@
         this.show = function() {
           fill(x,y,z);
           ellipse(this.x,this.y,100,100);
-          text('P2');
+          text('P2',this.x,this.y);
         };
         this.move = function() {
           if (keyIsDown(76) && (this.x < w-60)) { //right
@@ -85,14 +92,20 @@
           if ((d < 85) && (x > 0)) {
             speed1 += 0.1;
             x -= 5;
+            s++;
           }
           else if ((d < 85) && (z > 0)) {
             speed1 += 0.1;
             z -= 5;
+            s++;
           }
           else if ((d < 85) && (y)) {
             speed1 += 0.1;
             y -= 5;
+            s++;
+          }
+          else if (d < 85) {
+            s++;
           }
         }
       }
