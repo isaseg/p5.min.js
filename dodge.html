@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <script src="p5.min.js"></script>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <script>
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var player = new player();
+      var meteor = new meteor();
+      var d;
+      var s = 0;
+      
+      
+      function setup() {
+        createCanvas(w,h);
+      }
+      
+      function draw() {
+        background(255);
+        player.show();
+        player.move();
+        meteor.show();
+        meteor.kill();
+        textSize(20);
+        fill(0);
+        text('Score: ' + s, 10,20);
+      }
+      
+      function player() {
+        this.x = 60;
+        this.y = h/2;
+        this.show = function() {
+          noStroke();
+          fill(62,89,254);
+          ellipse(this.x, this.y, 100,100);
+        };
+        this.move = function() {
+          if (keyIsDown(68) && (this.x < w-60)) { //right
+            this.x += 10;
+          }
+          if (keyIsDown(65) && (this.x > 60)) { //left
+            this.x -= 10;
+          }
+          if (keyIsDown(87) && (this.y > 60)) { //up
+            this.y -= 10;
+          }
+          if(keyIsDown(83) && (this.y < h-60)){ //down
+            this.y += 10;
+          }
+        };
+      }
+      
+      function meteor() {
+        this.x = w + 30;
+        this.y = Math.floor(Math.random()*h*9/10);
+        this.show = function() {
+          if ((this.x > w) && (this.x < 0)) {
+          noStroke();
+          fill(234, 218, 42);
+          ellipse(this.x, this.y, 100,100);
+          }
+        };
+        this.kill = function() {
+          this.x -= 5;
+          d = dist(this.x, this.y, player.x, player.y);
+          if (d < 90) {
+            location.reload();
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
